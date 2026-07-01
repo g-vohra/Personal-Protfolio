@@ -7,17 +7,6 @@ import Social from './Social';
 import FallbackSpinner from './FallbackSpinner';
 import '../css/home.css';
 
-function initialsOf(name) {
-  if (!name) return '';
-  return name
-    .split(' ')
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join('')
-    .toUpperCase();
-}
-
 function Home() {
   const [data, setData] = useState(null);
 
@@ -33,14 +22,22 @@ function Home() {
   return data ? (
     <Fade triggerOnce className="home-fade-container">
       <section className="hero">
-        <div className="bento">
-          <div className="tile hero-intro span-4 rspan-2">
-            {data?.status && (
+        {/* Background ambient glow effect */}
+        <div className="hero-glow-glow"></div>
+
+        <div className="hero-main-container">
+          {data?.status && (
+            <div className="hero-status-tag">
+              <span className="status-dot"></span>
               <span className="hero-eyebrow">{data.status}</span>
-            )}
-            <h1 className="hero-name">{data?.name}</h1>
-            <div className="hero-roles">
-              <span>I&apos;m&nbsp;</span>
+            </div>
+          )}
+
+          <h1 className="hero-name">{data?.name}</h1>
+
+          <div className="hero-roles">
+            <span>I&apos;m&nbsp;</span>
+            <span className="typewriter-accent">
               <Typewriter
                 options={{
                   loop: true,
@@ -48,8 +45,12 @@ function Home() {
                   strings: data?.roles,
                 }}
               />
-            </div>
-            {data?.tagline && <p className="hero-tagline">{data.tagline}</p>}
+            </span>
+          </div>
+
+          {data?.tagline && <p className="hero-tagline">{data.tagline}</p>}
+
+          <div className="hero-actions">
             <div className="hero-cta">
               <Link className="btn-pill btn-accent" to="/projects">
                 View my work
@@ -58,16 +59,10 @@ function Home() {
                 About me
               </Link>
             </div>
-          </div>
 
-          <div className="tile tile--accent monogram span-2">
-            <span className="monogram-mark">{initialsOf(data?.name)}</span>
-            <span className="monogram-label">{data?.name}</span>
-          </div>
-
-          <div className="tile hero-social span-2">
-            <span className="tile-label">Find me</span>
-            <Social />
+            <div className="hero-social-inline">
+              <Social />
+            </div>
           </div>
         </div>
       </section>
