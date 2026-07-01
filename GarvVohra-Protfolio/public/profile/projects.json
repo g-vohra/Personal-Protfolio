@@ -1,6 +1,7 @@
 {
   "projects": [
 {
+  "image" : "images/projects/pf.png",
   "title": "Personal Portfolio",
   "bodyText": "- Developed a modern, responsive developer portfolio using React 18 and Vite.\n- Implemented a dark-first Bento UI with light/dark theme support using design-token based theming.\n- Built a data-driven architecture with JSON configuration for easy customisation and scalability.\n- Added smooth reveal animations and optimised the website for responsive performance across desktop and mobile devices.",
   "links": [

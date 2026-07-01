@@ -1,9 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-// Publishes the active theme as CSS custom properties so the plain CSS files in
-// src/css/* can consume the same tokens via var(--…). Spacing / radius / shadow
-// / motion / font tokens give the bento UI a consistent rhythm and one place to
-// retune the whole look.
 const GlobalStyles = createGlobalStyle`
   :root {
     /* Colour (theme-driven) */
@@ -24,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
     --shadow-sm: ${({ theme }) => theme.shadowSm};
     --shadow-md: ${({ theme }) => theme.shadowMd};
 
-    /* Spacing scale (4px base) */
+    /* Spacing scale */
     --space-1: 0.25rem;
     --space-2: 0.5rem;
     --space-3: 0.75rem;
@@ -35,44 +31,75 @@ const GlobalStyles = createGlobalStyle`
     --space-8: 4rem;
 
     /* Radius */
-    --radius-sm: 10px;
-    --radius-md: 16px;
-    --radius-lg: 22px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
 
     /* Motion */
-    --ease: cubic-bezier(0.4, 0, 0.2, 1);
-    --dur: 0.25s;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur: 0.2s;
 
-    /* Type */
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-      'Helvetica Neue', sans-serif;
-    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-    --font-mono: 'JetBrains Mono', source-code-pro, Menlo, Monaco, Consolas, monospace;
+    /* Type - The Ultimate Developer Tooling Font Stack */
+    --font-sans: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Geist', 'Inter', -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
   }
 
   html {
     scrollbar-color: var(--border) transparent;
+    background-color: var(--bg);
   }
 
   body {
-    /* Direct theme values (as the original did) plus Bootstrap's own body
-       variables so its reboot rules resolve to the active theme regardless of
-       stylesheet order. A pair of soft accent glows adds depth to the page. */
     --bs-body-bg: ${({ theme }) => theme.background};
     --bs-body-color: ${({ theme }) => theme.color};
     background-color: ${({ theme }) => theme.background};
     background-image:
-      radial-gradient(48rem 48rem at 100% -8%, ${({ theme }) => theme.glow1}, transparent 60%),
-      radial-gradient(42rem 42rem at -10% 8%, ${({ theme }) => theme.glow2}, transparent 55%);
+      radial-gradient(48rem 48rem at 100% -8%, ${({ theme }) => theme.glow1}, transparent 65%),
+      radial-gradient(42rem 42rem at -10% 8%, ${({ theme }) => theme.glow2}, transparent 60%),
+      radial-gradient(var(--border) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 24px 24px;
     background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat, no-repeat, repeat;
+    
     color: ${({ theme }) => theme.color};
-    transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Letter spacing for crisp, modern software UI readability */
+    letter-spacing: -0.01em; 
+    line-height: 1.6;
+    
+    transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+
+  /* Typography Polish Rules for Bento Layouts */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--text);
+    /* Tighter tracking on display text gives it an intentional, designed look */
+    letter-spacing: -0.03em; 
+    line-height: 1.2;
+    margin-bottom: var(--space-2);
+  }
+
+  code, pre, kbd, samp {
+    font-family: var(--font-mono);
+    /* Monospace elements need tracking opened up slightly to read well inside code chips */
+    letter-spacing: 0.02em; 
+    font-size: 0.9em;
   }
 
   a {
     color: var(--accent);
     text-decoration: none;
+    transition: color var(--dur) var(--ease);
+  }
+
+  a:hover {
+    color: var(--accent-2);
   }
 
   ::selection {
@@ -81,12 +108,15 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
     background: var(--border);
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
   }
   ::-webkit-scrollbar-thumb:hover {
     background: var(--text-muted);
@@ -95,7 +125,7 @@ const GlobalStyles = createGlobalStyle`
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
   }
 
   @media (prefers-reduced-motion: reduce) {
