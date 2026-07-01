@@ -1,19 +1,26 @@
 {
     "education":[
         {
-            "title": "Jun 20XX - Jun 20YY",
-            "cardTitle": "B.Tech, Computer Science",
-            "cardSubtitle":"XYZ University, City",
-            "cardDetailedText": "CGPA - 9.5",
+            "title": "Course completed: 26/06/2026",
+            "cardTitle": "Bachelors of Software Engineering Honours",
+            "cardSubtitle":"Monash University",
             "icon" : {
-                "src": "images/education/lorem-ipsum.png"
+                "src": "images/education/monash.png"
             }
         },
         {
-            "title": "Apr 20XX",
-            "cardTitle": "High School",
-            "cardSubtitle":"ABC School, City",
-            "cardDetailedText": "Marks - 95%"
+            "title": "Certification",
+            "cardTitle": "AI with Python",
+            "cardSubtitle":"Harvard University",
+            "icon" : {
+                "src": "images/education/har.png"
+            },
+            "links": [
+                {
+                    "url": "https://tinyurl.com/garv-cs50",
+                    "text": "View Certification"
+                }
+            ]
         }
     ]
 }
